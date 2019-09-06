@@ -12,6 +12,7 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.Database;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
@@ -59,5 +60,17 @@ public class AppRootConfig {
         JpaTransactionManager txManager = new JpaTransactionManager();
         txManager.setEntityManagerFactory(emf);
         return txManager;
+    }
+
+    @Bean
+    public CommonsMultipartResolver multipartResolver(){
+        CommonsMultipartResolver resolver = new CommonsMultipartResolver();
+        resolver.setMaxUploadSize(10000000);
+        return resolver;
+
+    }
+
+    public String getUploadDir(){
+        return env.getRequiredProperty("file.upload-dir");
     }
 }

@@ -21,11 +21,8 @@ public class Post implements Serializable {
     @Column(name = "CONTENT")
     private String content;
 
-    @Column(name = "VISIBILITY")
-    private boolean visibility;
-
     @Column(name = "STATUS")
-    private String status;
+    private boolean status;
 
     @Column(name = "VIEWS")
     private Integer views;
@@ -65,19 +62,11 @@ public class Post implements Serializable {
         this.content = content;
     }
 
-    public boolean isVisibility() {
-        return visibility;
-    }
-
-    public void setVisibility(boolean visibility) {
-        this.visibility = visibility;
-    }
-
-    public String getStatus() {
+    public boolean isStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(boolean status) {
         this.status = status;
     }
 
@@ -120,7 +109,6 @@ public class Post implements Serializable {
         sb.append("id=").append(id);
         sb.append(", title='").append(title).append('\'');
         sb.append(", content='").append(content).append('\'');
-        sb.append(", visibility=").append(visibility);
         sb.append(", status='").append(status).append('\'');
         sb.append(", views=").append(views);
         sb.append(", createdDate=").append(createdDate);

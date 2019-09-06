@@ -1,7 +1,5 @@
 package com.jamith.absd.personalblog.entity;
 
-import org.springframework.data.annotation.Id;
-
 import javax.persistence.*;
 import java.io.Serializable;
 
