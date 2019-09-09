@@ -7,6 +7,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
+@SuppressWarnings("Duplicates")
 @Entity
 @Table(name = "T_POST")
 public class Post implements Serializable {
@@ -105,7 +106,18 @@ public class Post implements Serializable {
         this.image = image;
     }
 
-    public PostDTO getPostDTO(){
+    public PostDTO getAdminPostDTO(){
+        PostDTO postDTO = new PostDTO();
+        postDTO.setId(this.id);
+        postDTO.setTitle(this.title);
+        postDTO.setStatus(this.status);
+        postDTO.setCreatedDate(this.createdDate);
+        postDTO.setModifiedDate(this.modifiedDate);
+        postDTO.setViews(this.views);
+        return postDTO;
+    }
+
+    public PostDTO getPublicPostDTO(){
         PostDTO postDTO = new PostDTO();
         postDTO.setId(this.id);
         postDTO.setTitle(this.title);

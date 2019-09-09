@@ -28,4 +28,9 @@ public class PostController {
     public ResponseEntity getAllPosts(){
         return new ResponseEntity(postService.getAllPosts(), HttpStatus.OK);
     }
+
+    @GetMapping("/change-status/{id}")
+    public ResponseEntity changeStatus(@PathVariable(name = "id") Integer id){
+        return new ResponseEntity(postService.changePostStatus(id),HttpStatus.OK);
+    }
 }

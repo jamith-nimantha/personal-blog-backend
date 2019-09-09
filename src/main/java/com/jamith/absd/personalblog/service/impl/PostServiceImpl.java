@@ -8,7 +8,6 @@ import com.jamith.absd.personalblog.repository.PostRepository;
 import com.jamith.absd.personalblog.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -36,13 +35,16 @@ public class PostServiceImpl implements PostService {
         post.setCreatedDate(new Date());
         post.setImage(image);
 
-        Post save = postRepository.save(post);
-        System.out.println(save);
-        return post != null;
+        return postRepository.save(post) != null;
     }
 
     @Override
     public List<PostDTO> getAllPosts() {
-       return postRepository.getAllByCreatedDate().stream().map(Post::getPostDTO).collect(Collectors.toList());
+       return postRepository.getAllByCreatedDate().stream().map(Post::getAdminPostDTO).collect(Collectors.toList());
+    }
+
+    @Override
+    public boolean changePostStatus(Integer id) {
+        return postRepository.updateStatus(!postRepository.findTopById(id).isStatus(), id) == 1;
     }
 }
