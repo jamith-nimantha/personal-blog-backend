@@ -5,7 +5,8 @@ USE blog;
 CREATE TABLE `T_USER`
 (
     `USERNAME` VARCHAR(50) UNIQUE NOT NULL,
-    `PASSWORD` VARCHAR(500)       NOT NULL
+    `PASSWORD` VARCHAR(500)       NOT NULL,
+    PRIMARY KEY (USERNAME)
 )
     ENGINE = InnoDB
     DEFAULT CHARSET latin1;
@@ -13,13 +14,16 @@ CREATE TABLE `T_USER`
 
 CREATE TABLE `T_DETAIL`
 (
+    `ID`               INT          NOT NULL,
     `BLOG_NAME`        VARCHAR(255) NOT NULL,
     `BLOG_DESCRIPTION` VARCHAR(500) NOT NULL,
     `BLOG_DOMAIN`      VARCHAR(255) NOT NULL,
     `LINKEDIN_URL`     VARCHAR(500),
     `FACEBOOK_URL`     VARCHAR(500),
     `TWITTER_URL`      VARCHAR(500),
-    `GITHUB_URL`       VARCHAR(500)
+    `GITHUB_URL`       VARCHAR(500),
+    PRIMARY KEY (ID)
+
 )
     ENGINE = InnoDB
     DEFAULT CHARSET latin1;
@@ -39,12 +43,11 @@ CREATE TABLE `T_POST`
     `ID`            INT(20)      NOT NULL AUTO_INCREMENT,
     `TITLE`         VARCHAR(255) NOT NULL,
     `CONTENT`       TEXT         NOT NULL,
-    `VISIBILITY`    BOOLEAN      NOT NULL,
-    `STATUS`        VARCHAR(10)  NOT NULL,
+    `STATUS`        BOOLEAN      NOT NULL,
     `VIEWS`         INT(20)      NOT NULL,
     `IMAGE_ID`      INT(20)      NOT NULL,
     `CREATED_DATE`  DATE         NOT NULL,
-    `MODIFIED_DATE` DATE         NOT NULL,
+    `MODIFIED_DATE` DATE,
     PRIMARY KEY (ID),
     CONSTRAINT FOREIGN KEY (`IMAGE_ID`) REFERENCES T_IMAGE (ID)
 )
@@ -69,5 +72,5 @@ INSERT INTO T_USER
 VALUES ('admin', 'root');
 
 INSERT INTO T_DETAIL VALUE (
-                            'Jamith \' Blog', ' programming, linux and internet technology.', 'www.jamith.com',
+                            '1', 'Jamith \' Blog', ' programming, linux and internet technology.', 'www.jamith.com',
                             'linkedin', 'fb', 'twitter', 'github');

@@ -1,11 +1,31 @@
 package com.jamith.absd.personalblog.controller;
 
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.jamith.absd.personalblog.dto.PostDTO;
+import com.jamith.absd.personalblog.service.PostService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @CrossOrigin
-@RequestMapping(name = "/api/post")
+@RequestMapping(value = "/api/post")
 public class PostController {
+
+    @Autowired
+    private PostService postService;
+
+    @PostMapping("/create-post")
+    public ResponseEntity savePost(@RequestBody PostDTO dto){
+        if (postService.createPost(dto)){
+            return new ResponseEntity(true, HttpStatus.OK);
+        }else {
+            return new ResponseEntity(false, HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @GetMapping("/get-all-post")
+    public ResponseEntity getAllPosts(){
+        return new ResponseEntity(postService.getAllPosts(), HttpStatus.OK);
+    }
 }
