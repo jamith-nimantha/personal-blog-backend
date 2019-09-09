@@ -47,4 +47,10 @@ public class PostServiceImpl implements PostService {
     public boolean changePostStatus(Integer id) {
         return postRepository.updateStatus(!postRepository.findTopById(id).isStatus(), id) == 1;
     }
+
+    @Override
+    public boolean deletePost(Integer id) {
+        postRepository.delete(postRepository.findTopById(id));
+        return true;
+    }
 }

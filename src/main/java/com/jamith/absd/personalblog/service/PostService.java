@@ -11,6 +11,8 @@ public interface PostService {
     boolean createPost(PostDTO dto);
 
     List<PostDTO> getAllPosts();
-    
+
     boolean changePostStatus(Integer id);
+
+    boolean deletePost(Integer id);
 }
