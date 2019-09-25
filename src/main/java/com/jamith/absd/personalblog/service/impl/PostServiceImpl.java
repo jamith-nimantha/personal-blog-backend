@@ -1,6 +1,7 @@
 package com.jamith.absd.personalblog.service.impl;
 
 import com.jamith.absd.personalblog.dto.PostDTO;
+import com.jamith.absd.personalblog.dto.PublicPostDTO;
 import com.jamith.absd.personalblog.entity.Image;
 import com.jamith.absd.personalblog.entity.Post;
 import com.jamith.absd.personalblog.repository.ImageRepository;
@@ -8,6 +9,8 @@ import com.jamith.absd.personalblog.repository.PostRepository;
 import com.jamith.absd.personalblog.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -52,5 +55,25 @@ public class PostServiceImpl implements PostService {
     public boolean deletePost(Integer id) {
         postRepository.delete(postRepository.findTopById(id));
         return true;
+    }
+
+    @Override
+    public List<PublicPostDTO> getAllPublicPosts() {
+        List<Post> allByStatus = postRepository.getAllByStatus();
+        List<PublicPostDTO> dtos = new ArrayList<>();
+        for (Post post: allByStatus){
+            PublicPostDTO publicPostDTO =  new PublicPostDTO();
+            publicPostDTO.setTitle(post.getTitle());
+            publicPostDTO.setId(post.getId());
+            publicPostDTO.setCreatedDate(post.getCreatedDate());
+            publicPostDTO.setImage(post.getImage().getPath());
+            try {
+                publicPostDTO.setContent(post.getContent().substring(0,480).concat("..."));
+            } catch (Exception e) {
+                publicPostDTO.setContent(post.getContent());
+            }
+            dtos.add(publicPostDTO);
+        }
+        return dtos;
     }
 }

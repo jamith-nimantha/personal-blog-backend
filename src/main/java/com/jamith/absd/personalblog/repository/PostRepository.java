@@ -21,4 +21,7 @@ public interface PostRepository extends JpaRepository<Post,Integer> {
     @Transactional
     @Query(value = "UPDATE T_POST SET STATUS=?1 WHERE ID=?2",nativeQuery = true)
     Integer updateStatus(boolean status, Integer id);
+
+    @Query(value = "SELECT * FROM T_POST WHERE STATUS=1", nativeQuery = true)
+    List<Post> getAllByStatus();
 }

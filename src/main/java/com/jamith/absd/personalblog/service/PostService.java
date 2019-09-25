@@ -1,6 +1,7 @@
 package com.jamith.absd.personalblog.service;
 
 import com.jamith.absd.personalblog.dto.PostDTO;
+import com.jamith.absd.personalblog.dto.PublicPostDTO;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,4 +16,6 @@ public interface PostService {
     boolean changePostStatus(Integer id);
 
     boolean deletePost(Integer id);
+
+    List<PublicPostDTO> getAllPublicPosts();
 }
