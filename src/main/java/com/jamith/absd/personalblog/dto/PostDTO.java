@@ -7,6 +7,7 @@ import java.util.Date;
 public class PostDTO {
     private Integer id;
     private String title;
+    private String permalink;
     private String content;
     private boolean status;
     private Integer views;
@@ -80,11 +81,20 @@ public class PostDTO {
         this.image = image;
     }
 
+    public String getPermalink() {
+        return permalink;
+    }
+
+    public void setPermalink(String permalink) {
+        this.permalink = permalink;
+    }
+
     @Override
     public String toString() {
         final StringBuffer sb = new StringBuffer("PostDTO{");
         sb.append("id=").append(id);
         sb.append(", title='").append(title).append('\'');
+        sb.append(", permalink='").append(permalink).append('\'');
         sb.append(", content='").append(content).append('\'');
         sb.append(", status=").append(status);
         sb.append(", views=").append(views);

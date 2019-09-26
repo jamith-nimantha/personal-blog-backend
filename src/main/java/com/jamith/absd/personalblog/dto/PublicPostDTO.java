@@ -8,9 +8,18 @@ public class PublicPostDTO {
 
     private Integer id;
     private String title;
+    private String permalink;
     private String content;
     private Date createdDate;
     private String image;
+
+    public String getPermalink() {
+        return permalink;
+    }
+
+    public void setPermalink(String permalink) {
+        this.permalink = permalink;
+    }
 
     public Integer getId() {
         return id;
@@ -58,6 +67,7 @@ public class PublicPostDTO {
         final StringBuffer sb = new StringBuffer("PublicPostDTO{");
         sb.append("id=").append(id);
         sb.append(", title='").append(title).append('\'');
+        sb.append(", permalink='").append(permalink).append('\'');
         sb.append(", content='").append(content).append('\'');
         sb.append(", createdDate=").append(createdDate);
         sb.append(", image='").append(image).append('\'');

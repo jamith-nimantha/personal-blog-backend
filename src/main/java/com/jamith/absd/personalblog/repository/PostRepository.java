@@ -17,6 +17,8 @@ public interface PostRepository extends JpaRepository<Post,Integer> {
 
     Post findTopById(Integer id);
 
+    Post findTopByPermalink(String permalink);
+
     @Modifying
     @Transactional
     @Query(value = "UPDATE T_POST SET STATUS=?1 WHERE ID=?2",nativeQuery = true)

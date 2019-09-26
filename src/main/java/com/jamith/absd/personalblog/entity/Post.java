@@ -21,6 +21,9 @@ public class Post implements Serializable {
     @Column(name = "TITLE")
     private String title;
 
+    @Column(name = "PERMALINK")
+    private String permalink;
+
     @Column(name = "CONTENT")
     private String content;
 
@@ -106,10 +109,19 @@ public class Post implements Serializable {
         this.image = image;
     }
 
+    public String getPermalink() {
+        return permalink;
+    }
+
+    public void setPermalink(String permalink) {
+        this.permalink = permalink;
+    }
+
     public PostDTO getAdminPostDTO(){
         PostDTO postDTO = new PostDTO();
         postDTO.setId(this.id);
         postDTO.setTitle(this.title);
+        postDTO.setPermalink(this.permalink);
         postDTO.setStatus(this.status);
         postDTO.setCreatedDate(this.createdDate);
         postDTO.setModifiedDate(this.modifiedDate);
@@ -117,18 +129,19 @@ public class Post implements Serializable {
         return postDTO;
     }
 
-    public PostDTO getPublicPostDTO(){
-        PostDTO postDTO = new PostDTO();
-        postDTO.setId(this.id);
-        postDTO.setTitle(this.title);
-        postDTO.setContent(this.content);
-        postDTO.setStatus(this.status);
-        postDTO.setCreatedDate(this.createdDate);
-        postDTO.setModifiedDate(this.modifiedDate);
-        postDTO.setViews(this.views);
-        postDTO.setImage(this.image.getPath());
-        return postDTO;
-    }
+//    public PostDTO getPublicPostDTO(){
+//        PostDTO postDTO = new PostDTO();
+//        postDTO.setId(this.id);
+//        postDTO.setTitle(this.title);
+//        postDTO.setPermalink(this.permalink);
+//        postDTO.setContent(this.content);
+//        postDTO.setStatus(this.status);
+//        postDTO.setCreatedDate(this.createdDate);
+//        postDTO.setModifiedDate(this.modifiedDate);
+//        postDTO.setViews(this.views);
+//        postDTO.setImage(this.image.getPath());
+//        return postDTO;
+//    }
 
 
     @Override
@@ -136,8 +149,9 @@ public class Post implements Serializable {
         final StringBuffer sb = new StringBuffer("Post{");
         sb.append("id=").append(id);
         sb.append(", title='").append(title).append('\'');
+        sb.append(", permalink='").append(permalink).append('\'');
         sb.append(", content='").append(content).append('\'');
-        sb.append(", status='").append(status).append('\'');
+        sb.append(", status=").append(status);
         sb.append(", views=").append(views);
         sb.append(", createdDate=").append(createdDate);
         sb.append(", modifiedDate=").append(modifiedDate);

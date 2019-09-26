@@ -40,7 +40,7 @@ public class AppRootConfig {
         dms.setDriverClassName("com.mysql.jdbc.Driver");
         dms.setUsername(env.getRequiredProperty("spring.datasource.username"));
         dms.setPassword(env.getRequiredProperty("spring.datasource.password"));
-        dms.setUrl(env.getRequiredProperty("url"));
+        dms.setUrl(env.getRequiredProperty("spring.datasource.url"));
         return dms;
 
     }
@@ -51,7 +51,7 @@ public class AppRootConfig {
         jpa.setDatabase(Database.MYSQL);
         jpa.setGenerateDdl(true);
         jpa.setShowSql(true);
-        jpa.setDatabasePlatform(env.getRequiredProperty("dialect"));
+        jpa.setDatabasePlatform(env.getRequiredProperty("spring.datasource.dialect"));
         return jpa;
     }
 

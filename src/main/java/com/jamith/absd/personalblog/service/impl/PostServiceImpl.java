@@ -32,6 +32,7 @@ public class PostServiceImpl implements PostService {
 
         Post post = new Post();
         post.setTitle(dto.getTitle());
+        post.setPermalink(dto.getTitle().toLowerCase().replace('\'',' ').replace(' ','-'));
         post.setContent(dto.getContent());
         post.setStatus(true);
         post.setViews(0);
@@ -58,12 +59,32 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
+    public PublicPostDTO getPostByPermalink(String permalink) {
+        Post post = postRepository.findTopByPermalink(permalink); // TODO you have to handle a custom exception here
+        if (post!=null) {
+            post.setViews(post.getViews()+1);
+            postRepository.save(post);
+            PublicPostDTO publicPostDTO =  new PublicPostDTO();
+            publicPostDTO.setTitle(post.getTitle());
+            publicPostDTO.setPermalink(post.getPermalink());
+            publicPostDTO.setContent(post.getContent());
+            publicPostDTO.setId(post.getId());
+            publicPostDTO.setCreatedDate(post.getCreatedDate());
+            publicPostDTO.setImage(post.getImage().getPath());
+            return publicPostDTO;
+        } else {
+            return null;
+        }
+    }
+
+    @Override
     public List<PublicPostDTO> getAllPublicPosts() {
         List<Post> allByStatus = postRepository.getAllByStatus();
         List<PublicPostDTO> dtos = new ArrayList<>();
         for (Post post: allByStatus){
             PublicPostDTO publicPostDTO =  new PublicPostDTO();
             publicPostDTO.setTitle(post.getTitle());
+            publicPostDTO.setPermalink(post.getPermalink());
             publicPostDTO.setId(post.getId());
             publicPostDTO.setCreatedDate(post.getCreatedDate());
             publicPostDTO.setImage(post.getImage().getPath());

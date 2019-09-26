@@ -42,6 +42,7 @@ CREATE TABLE `T_POST`
 (
     `ID`            INT(20)      NOT NULL AUTO_INCREMENT,
     `TITLE`         VARCHAR(255) NOT NULL,
+    `PERMALINK`     VARCHAR(255) NOT NULL,
     `CONTENT`       TEXT         NOT NULL,
     `STATUS`        BOOLEAN      NOT NULL,
     `VIEWS`         INT(20)      NOT NULL,

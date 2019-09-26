@@ -17,5 +17,7 @@ public interface PostService {
 
     boolean deletePost(Integer id);
 
+    PublicPostDTO getPostByPermalink(String permalink);
+
     List<PublicPostDTO> getAllPublicPosts();
 }

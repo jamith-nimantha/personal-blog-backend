@@ -44,4 +44,9 @@ public class PostController {
         return new ResponseEntity(postService.deletePost(id), HttpStatus.OK);
     }
 
+    @GetMapping("/{permalink}")
+    public ResponseEntity getPost(@PathVariable(name = "permalink") String permalink){
+        return new ResponseEntity(postService.getPostByPermalink(permalink),HttpStatus.OK);
+    }
+
 }
