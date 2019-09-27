@@ -24,6 +24,12 @@ public interface PostRepository extends JpaRepository<Post,Integer> {
     @Query(value = "UPDATE T_POST SET STATUS=?1 WHERE ID=?2",nativeQuery = true)
     Integer updateStatus(boolean status, Integer id);
 
-    @Query(value = "SELECT * FROM T_POST WHERE STATUS=1", nativeQuery = true)
+    @Query(value = "SELECT * FROM T_POST WHERE STATUS=1 ORDER BY CREATED_DATE DESC", nativeQuery = true)
     List<Post> getAllByStatus();
+
+    @Query(value = "SELECT SUM(VIEWS) FROM T_POST", nativeQuery = true)
+    Integer getTotalPostViews();
+
+    @Query(value = "SELECT COUNT(*) FROM T_POST", nativeQuery = true)
+    Integer getTotalPostsCount();
 }
