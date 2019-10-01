@@ -24,4 +24,9 @@ public class DetailController {
     public ResponseEntity updateDetails(@RequestBody DetailDTO dto){
         return new ResponseEntity(detailService.updateDetails(dto),HttpStatus.OK);
     }
+
+    @GetMapping(value = "/stat")
+    public ResponseEntity getDashStats(){
+        return new ResponseEntity(detailService.getStats(),HttpStatus.OK);
+    }
 }

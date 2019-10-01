@@ -1,8 +1,11 @@
 package com.jamith.absd.personalblog.service.impl;
 
 import com.jamith.absd.personalblog.dto.DetailDTO;
+import com.jamith.absd.personalblog.dto.StatDTO;
 import com.jamith.absd.personalblog.entity.Detail;
+import com.jamith.absd.personalblog.repository.CommentRepository;
 import com.jamith.absd.personalblog.repository.DetailRepository;
+import com.jamith.absd.personalblog.repository.PostRepository;
 import com.jamith.absd.personalblog.service.DetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,6 +15,12 @@ public class DetailServiceImpl implements DetailService {
 
     @Autowired
     private DetailRepository detailRepository;
+
+    @Autowired
+    private PostRepository postRepository;
+
+    @Autowired
+    private CommentRepository commentRepository;
 
     @Override
     public DetailDTO getDetails() {
@@ -43,5 +52,14 @@ public class DetailServiceImpl implements DetailService {
         detail.setGithubURL(dto.getGithub());
 
         return detailRepository.save(detail) != null;
+    }
+
+    @Override
+    public StatDTO getStats() {
+        StatDTO dto = new StatDTO();
+        dto.setPostCount(postRepository.getTotalPostsCount());
+        dto.setCommentCount(commentRepository.getTotalCommentCount());
+        dto.setViewsCount(postRepository.getTotalPostViews());
+        return dto;
     }
 }
